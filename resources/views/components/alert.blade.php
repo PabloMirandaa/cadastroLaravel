@@ -1,0 +1,28 @@
+@if(session()->has('success'))
+            <div class="alert alert-success m-3" role="alert">
+                {{session('success')}}
+            </div>
+
+            <script>
+            document.addEventListener('DOMContentLoaded', () =>{
+                Swal.fire('Pronto!', "{{session('success')}}",'success'
+                );
+            })           
+            </script>
+@endif
+
+@if($errors->any())
+            @php
+            $mensagem = "";
+                foreach ($errors->all() as $error){
+                    $mensagem .= $error . '<br>';}                       
+            @endphp
+
+            <script>
+            document.addEventListener('DOMContentLoaded', () =>{
+                Swal.fire('Error!', "{{!! $mensagem !!}}",'error'
+                );
+            })           
+            </script>
+@endif
+
