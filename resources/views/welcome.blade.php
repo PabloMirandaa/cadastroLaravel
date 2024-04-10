@@ -9,11 +9,7 @@
     </head>
     <body>
 
-        <a href="{{route('conta.create')}}">Cadastrar</a><br>
-        <a href="{{route('conta.show')}}">Detalhe das Contas</a><br>
-        <a href="{{route('conta.edit')}}">Editar</a>
-        <h1>bem vindo</h1>
-        <a href="{{route('conta.index')}}">Listar as Contas</a>
+    <a href="{{ route('conta.index') }}">Listar as Contas</a>
         
     </body>
 </html>

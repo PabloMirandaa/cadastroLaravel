@@ -21,7 +21,6 @@ Route::get('/', function () {
 // Rotas para Contas
 //criando a controller(que vai nas [] com php artisan make:controller NomeConta)
 Route::get('/indexConta',[ContaController::class, 'index'])->name('conta.index'); //se apertar ctrl e clicar no index é direcionado pra controller
-Route::get('/indexConta',[ContaController::class, 'index'])->name('conta.index');
 Route::get('/createConta',[ContaController::class, 'create'])->name('conta.create');
 Route::post('/storeConta',[ContaController::class, 'store'])->name('conta.store');
 Route::get('/showConta/{conta}',[ContaController::class, 'show'])->name('conta.show');//é acrescentado o {conta} para indicar que deve ser enviado o id da conta. Paramentro com o mesmo nome da Models (nesse caso conta)

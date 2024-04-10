@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContaRequest;
 use App\Models\Conta;
+use App\Models\SituacaoConta;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Http\Request;
@@ -46,9 +47,14 @@ class ContaController extends Controller
     //Carregar o formulario de cadastrar nova conta
     public function create()
     {
+        // Recuperar do BD as situações
+        $situacoesContas=SituacaoConta::orderBy('nome','asc')->get();
         
-        return view('conta.create'); 
+        return view('conta.create', [
+            'situacoesContas'=> $situacoesContas
+        ]); 
     }
+    
     // cadastrar no banco de dados nova conta
     public function store(ContaRequest $request) //importo o "ContaRequest" depois atribuo e injeto em "$request"
     {
@@ -60,6 +66,7 @@ class ContaController extends Controller
             'nome' => $request->nome,
             'valor' => str_replace(',', '.', str_replace('.', '', $request->valor)),
             'vencimento' => $request->vencimento,
+            'situacao_conta_id' => $request->situacao_conta_id,
         ]); 
         
         // Redirecionar o usuário, enviar a mensagem de sucesso
@@ -75,8 +82,13 @@ class ContaController extends Controller
     // carregar o formulário editar a conta
     public function edit(Conta $conta)
     {
+        // Recuperar do BD as situações
+        $situacoesContas=SituacaoConta::orderBy('nome','asc')->get();
    
-        return view('conta.edit', ['conta'=>$conta]); 
+        return view('conta.edit', [
+            'conta'=>$conta,
+            'situacoesContas' => $situacoesContas,
+        ]); 
     }
     // editar no banco de dados a conta
     public function update(ContaRequest $request, Conta $conta)
@@ -89,6 +101,7 @@ class ContaController extends Controller
             'nome'=> $request->nome,
             'valor'=> str_replace(',', '.', str_replace('.', '', $request->valor)),
             'vencimento'=> $request->vencimento,
+            'situacao_conta_id' => $request->situacao_conta_id,
         ]);  
 
         // Salvar log

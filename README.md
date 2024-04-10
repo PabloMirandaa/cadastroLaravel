@@ -98,7 +98,7 @@ Instalar o Vite
 npm install
 ```
 
-Instaalar o framework Bootstrap
+Instalar o framework Bootstrap
 ```
 npm i --save bootstrap @popperjs/core
 ```
